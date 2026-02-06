@@ -1,0 +1,16 @@
+services:
+  rundler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: node
+    ports:
+      # RPC
+      - "3000:3000"
+      # Metrics
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./bin/rundler/chain_specs:/app/chain_specs:ro
+    restart: unless-stopped
